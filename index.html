@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Important Question</title>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    overflow:hidden;
+}
+
+.container{
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    text-align:center;
+}
+
+h1{
+    margin-bottom:30px;
+}
+
+button{
+    font-size:22px;
+    padding:12px 30px;
+    margin:10px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+#yesBtn{
+    background:#4CAF50;
+    color:white;
+}
+
+#noBtn{
+    background:#f44336;
+    color:white;
+}
+
+#secondPage{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+}
+
+#secondPage img{
+    margin-top:20px;
+    max-width:350px;
+    border-radius:15px;
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="firstPage">
+    <h1>will you be my girlfriend? (oficial) 🙏</h1>
+    <button id="yesBtn">YES</button>
+    <button id="noBtn">NO</button>
+</div>
+
+<div class="container" id="secondPage">
+    <h1>now..</h1>
+    <img src="sink.jpg">
+</div>
+
+<audio id="sound" src="yey.mp3"></audio>
+
+<script>
+let yesBtn=document.getElementById("yesBtn");
+let noBtn=document.getElementById("noBtn");
+let firstPage=document.getElementById("firstPage");
+let secondPage=document.getElementById("secondPage");
+let sound=document.getElementById("sound");
+
+let yesScale=1;
+let noScale=1;
+
+yesBtn.onclick=function(){
+
+    sound.play();
+
+    confetti({
+        particleCount:200,
+        spread:120,
+        origin:{y:0.6}
+    });
+
+    setTimeout(()=>{
+        firstPage.style.display="none";
+        secondPage.style.display="flex";
+    },2500);
+};
+
+noBtn.onclick=function(){
+
+    yesScale+=0.25;
+    noScale-=0.15;
+
+    yesBtn.style.transform="scale("+yesScale+")";
+    noBtn.style.transform="scale("+noScale+")";
+
+    if(noScale<=0.2){
+        noBtn.style.display="none";
+    }
+};
+</script>
+
+</body>
+</html>
+Desktop
+└── girlfriend-site
+    ├── index.html
+    ├── sink.jpg
+    └── yey.mp3
